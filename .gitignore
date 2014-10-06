@@ -1,0 +1,6 @@
+# pycharm project files
+.idea
+
+# python build files
+*.pyc
+*.pyo

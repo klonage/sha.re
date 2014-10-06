@@ -1,0 +1,47 @@
+{% extends 'sha_auth/base.html' %}
+
+{% block main %}
+ <div>
+ <h1>Sha.re</h1>
+
+ <p>
+   {% if user and not user.is_anonymous %}
+   <ul>
+
+     <li>
+       <a>Hello {{ user.get_full_name|default:user.username }}!</a>
+     </li>
+     <li>
+       <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+     </li>
+     </ul>
+   {% else %}
+<div class="container" style="width:600px">
+            <h2 class="form-signin-heading">Please sign in</h2>
+
+    <table><tr><td width="200px">
+        <h3>Local account</h3>
+      <form class="form-signin" role="form">
+
+        <input type="email" class="form-control" placeholder="Email address" required autofocus>
+        <input type="password" class="form-control" placeholder="Password" required>
+        <label class="checkbox">
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form></td><td valign=top style="padding-left:40px">
+    <h3>Social network's account</h3> <br />
+       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a> <br />
+       <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Login with Google</a>
+     <br />
+       <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
+        </td></tr>
+</table>
+
+    </div> <!-- /container -->
+   {% endif %}
+
+ </p>
+ </div>
+
+{% endblock %}
