@@ -1,47 +1,73 @@
 {% extends 'sha_auth/base.html' %}
 
 {% block main %}
- <div>
- <h1>Sha.re</h1>
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Sha.re</a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li  style="color:white;margin:10px 15px">Search event: <input></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li class="divider"></li>
+                        <li class="dropdown-header">Nav header</li>
+                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
 
- <p>
-   {% if user and not user.is_anonymous %}
-   <ul>
+<div style="padding-top:50px">
+    <p>
+        {% if user and not user.is_anonymous %}
+        <a>Hello {{ user.get_full_name|default:user.username }}!</a><br/>
+        <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
+        {% else %}
 
-     <li>
-       <a>Hello {{ user.get_full_name|default:user.username }}!</a>
-     </li>
-     <li>
-       <a href="{% url 'auth:logout' %}?next={{ request.path }}">Logout</a>
-     </li>
-     </ul>
-   {% else %}
-<div class="container" style="width:600px">
-            <h2 class="form-signin-heading">Please sign in</h2>
+    <div class="container" style="width:600px">
+        <h2 class="form-signin-heading">Please sign in</h2>
 
-    <table><tr><td width="200px">
-        <h3>Local account</h3>
-      <form class="form-signin" role="form">
+        <table>
+            <tr>
+                <td width="200px">
+                    <h3>Local account</h3>
 
-        <input type="email" class="form-control" placeholder="Email address" required autofocus>
-        <input type="password" class="form-control" placeholder="Password" required>
-        <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      </form></td><td valign=top style="padding-left:40px">
-    <h3>Social network's account</h3> <br />
-       <a href="{% url 'social:begin' 'facebook' %}?next={{ request.path }}">Login with Facebook</a> <br />
-       <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}">Login with Google</a>
-     <br />
-       <a href="{% url 'social:begin' 'twitter' %}?next={{ request.path }}">Login with Twitter</a>
-        </td></tr>
-</table>
+                    <form class="form-signin" role="form">
 
-    </div> <!-- /container -->
-   {% endif %}
+                        <input type="email" class="form-control" placeholder="Email address" required autofocus>
+                        <input type="password" class="form-control" placeholder="Password" required>
+                        <label class="checkbox">
+                            <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    </form>
+                </td>
+                <td valign=top style="padding-left:40px">
+                    <h3>Social network's account</h3> <br/>
+                    <button type="button" onClick="location.href='{% url 'social:begin' 'facebook' %}?next={{ request.path }}'" class="btn btn-lg btn-primary" style="background-color:#3b5998">Facebook</button><br />
+                    <button type="button" onClick="location.href='{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}'"  class="btn btn-lg btn-primary" style="background-color:#e84e40">Google</button><br />
+                    <button type="button" onClick="location.href='{% url 'social:begin' 'twitter' %}?next={{ request.path }}'" class="btn btn-lg btn-primary" style="background-color:#55ACEE">Twitter</button><br />
+                </td>
+            </tr>
+        </table>
 
- </p>
- </div>
-
+    </div>
+    {% endif %}
+    </p>
+</div>
 {% endblock %}
+
+
