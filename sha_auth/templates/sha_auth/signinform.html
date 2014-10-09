@@ -5,17 +5,22 @@
 </div>
 {% endif %}
 <div class="container">
+    {% if user_signin > 0 %}
+    <div class="alert alert-danger">
+        <span class="glyphicon glyphicon-remove"></span><strong> Invalid username or password.</strong>
+    </div>
+    {% endif %}
     <div class="row">
         <div class="col-md-2">
             <h3>Sha.re account</h3>
-
-            <form class="form-signin" role="form">
-                <input type="email" class="form-control" placeholder="Email address" required autofocus
-                       style="margin-bottom:10px">
-                <input type="password" class="form-control" placeholder="Password" required>
+            <form class="form-signin" role="form" method="POST">{% csrf_token %}
+                <input class="form-control" placeholder="Username" required autofocus
+                       style="margin-bottom:10px" name="username">
+                <input type="password" class="form-control" placeholder="Password" required name="password">
                 <label class="checkbox">
-                    <input type="checkbox" value="remember-me"> Remember me
+                    <input type="checkbox" value="remember-me" name="remember_me"> Remember me
                 </label>
+                <input type="hidden" name="signinform" value="1">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
             </form>
         </div>
