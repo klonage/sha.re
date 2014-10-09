@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'social.apps.django_app.default', # social media sign in (facebook, twitter, google+)
     'sha_auth',
     'sha_main',
+    'sha_events',
 )
 
 MIDDLEWARE_CLASSES = (

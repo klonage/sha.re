@@ -18,8 +18,24 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
+
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+        <script src="{% static "js/google-maps.js" %}"></script>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
+        <script type="text/javascript" src="{% static "bootstrap/js/bootstrap-datetimepicker.min.js" %}"></script>
+        <style>
+            html, body, #map-canvas {
+            height: 500px;
+            width: 700px;
+            }
+        </style>
     </head>
     <body>
+
     <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -57,12 +73,10 @@
             <!--/.nav-collapse -->
         </div>
     </div>
+    <div class="container" style="margin-top:80px">
+        {% block main %}{% endblock %}
+    </div>
 
-    {% block main %}{% endblock %}
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
   </body>
 </html>
 
