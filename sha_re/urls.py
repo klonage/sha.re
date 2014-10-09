@@ -7,4 +7,5 @@ urlpatterns = patterns('',
     url('', include('django.contrib.auth.urls', namespace='auth')),
     url(r'^auth/', include('sha_auth.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', include('sha_main.urls')),
 )
