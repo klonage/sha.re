@@ -1,0 +1,41 @@
+<h2 class="form-signin-heading">Sign in</h2>
+{% if user_created == 1 %}
+<div class="alert alert-success">
+    <strong><span class="glyphicon glyphicon-ok"></span> User registered!</strong>
+</div>
+{% endif %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <h3>Sha.re account</h3>
+
+            <form class="form-signin" role="form">
+                <input type="email" class="form-control" placeholder="Email address" required autofocus
+                       style="margin-bottom:10px">
+                <input type="password" class="form-control" placeholder="Password" required>
+                <label class="checkbox">
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+        </div>
+        <div class="col-md-10">
+            <h3>Sign in by 1 click!</h3> <br/>
+            <button type="button"
+                    onClick="location.href='{% url 'social:begin' 'facebook' %}?next={{ request.path }}'"
+                    class="facebook-login-btn social-login-btn btn btn-primary">Facebook
+            </button>
+            <br/>
+            <button type="button"
+                    onClick="location.href='{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}'"
+                    class="googleplus-login-btn social-login-btn btn btn-primary">Google
+            </button>
+            <br/>
+            <button type="button"
+                    onClick="location.href='{% url 'social:begin' 'twitter' %}?next={{ request.path }}'"
+                    class="twitter-login-btn social-login-btn btn btn-primary">Twitter
+            </button>
+            <br/>
+        </div>
+    </div>
+</div>

@@ -8,8 +8,8 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li  style="color:white;margin:10px 15px">Search event: <input></li>
+                <li><a href="#">Home</a></li>
+                <li style="color:white;margin:10px 15px">Search event: <input></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li class="dropdown">
@@ -38,36 +38,29 @@
         {% else %}
 
     <div class="container" style="width:600px">
-        <h2 class="form-signin-heading">Please sign in</h2>
-
-        <table>
-            <tr>
-                <td width="200px">
-                    <h3>Local account</h3>
-
-                    <form class="form-signin" role="form">
-
-                        <input type="email" class="form-control" placeholder="Email address" required autofocus>
-                        <input type="password" class="form-control" placeholder="Password" required>
-                        <label class="checkbox">
-                            <input type="checkbox" value="remember-me"> Remember me
-                        </label>
-                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                    </form>
-                </td>
-                <td valign=top style="padding-left:40px">
-                    <h3>Social network's account</h3> <br/>
-                    <button type="button" onClick="location.href='{% url 'social:begin' 'facebook' %}?next={{ request.path }}'" class="btn btn-lg btn-primary" style="background-color:#3b5998">Facebook</button><br />
-                    <button type="button" onClick="location.href='{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}'"  class="btn btn-lg btn-primary" style="background-color:#e84e40">Google</button><br />
-                    <button type="button" onClick="location.href='{% url 'social:begin' 'twitter' %}?next={{ request.path }}'" class="btn btn-lg btn-primary" style="background-color:#55ACEE">Twitter</button><br />
-                </td>
-            </tr>
-        </table>
-
+        <ul class="nav nav-tabs" role="tablist" id="myTab">
+            <li
+            {% if user_created < 2 %} class="active" {% endif %}>
+            <a href="#signin" data-toggle="tab">Sign in</a>
+            </li>
+            <li
+            {% if user_created >= 2 %} class="active" {% endif %}>
+            <a data-toggle="tab" href="#signup">Create account</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade {% if user_created < 2 %} in active {% endif %}" id="signin">
+                {% include "sha_auth/signinform.html" %}
+            </div>
+            <div class="tab-pane fade {% if user_created >= 2 %} in active {% endif %}" id="signup">
+                {% include "sha_auth/signupform.html" %}
+            </div>
+        </div>
     </div>
     {% endif %}
     </p>
 </div>
+
 {% endblock %}
 
 

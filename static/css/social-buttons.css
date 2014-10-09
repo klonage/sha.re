@@ -1,0 +1,42 @@
+.social-login-btn {
+background-repeat: no-repeat;
+background-position: left center;
+background-position: 10px;
+background-size: 20px 20px;
+padding-left: 40px;
+width:130px;
+margin: 5px;
+}
+
+.facebook-login-btn {
+background-color:#3b5998;
+border-color:#3b5998;
+background-image: url('/static/img/fb-white.png');
+}
+
+.facebook-login-btn:hover {
+background-color:#3b5998;
+border-color:#3b5998;
+}
+
+.twitter-login-btn {
+background-color:#55ACEE;
+border-color:#55ACEE;;
+background-image: url('/static/img/twitter-white.png');
+}
+
+.twitter-login-btn:hover {
+background-color:#55ACEE;
+border-color:#55ACEE;;
+}
+
+.googleplus-login-btn {
+background-color:#e84e40;
+border-color:#e84e40;
+background-image: url('/static/img/googleplus-red.png');
+}
+
+.googleplus-login-btn:hover {
+background-color:#e84e40;
+border-color:#e84e40;
+}

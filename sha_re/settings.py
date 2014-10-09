@@ -34,11 +34,12 @@ INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'social.apps.django_app.default', # social media sign in (facebook, twitter, google+)
     'sha_auth',
-    'bootstrap3'
+
 )
 
 MIDDLEWARE_CLASSES = (
