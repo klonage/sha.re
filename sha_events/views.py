@@ -11,6 +11,11 @@ class NewEventErrorCode:
     SQL = 4
 
 
+def events_from_range(request, north, south, east, west):
+    events_nearby = Event.objects.filter(latitude__gte=south, latitude__lte=north, longitude__gte=west, longitude__lte=east);
+    return render(request, 'sha_events/events_from_range.html', {'events': events_nearby})
+
+
 def create_hash_tags(hash_str):
     hashes = []
     for single_hash in hash_str.split(','):

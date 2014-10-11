@@ -2,6 +2,8 @@
 
 {% block main %}
 
+<div class="row">
+  <div class="col-md-6">
 Nearest events:
 {% for event in nearest_events %}
 <div class="short-event">
@@ -16,6 +18,11 @@ Nearest events:
         <i>{{event.start_date}}</i> <br />
         {{event.description}}</span></blockquote>
 </div>
+      </div>
+    <div class="col-mnd-6">
+        <div id="main-map-canvas" style="height: 400px; width: 600px"></div>
+    </div>
+    </div>
 {% endfor %}
 
 {% endblock %}
