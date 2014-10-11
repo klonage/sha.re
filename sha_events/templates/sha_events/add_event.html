@@ -2,32 +2,98 @@
 
 {% block main %}
 
-<form class="form-horizontal">
-    {% for field in form %}
-    <div class="form-group">
-        <label>{{ field.label_tag }}</label> {{ field }}
-    </div>
-    {% endfor %}
-    <link rel="stylesheet" type="text/css" media="screen"
-          href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css" />
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet" />
+<form class="form-horizontal" method="post">{% csrf_token %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {% for field in form %}
+                <div class="form-group">
+                    <label>{{ field.label_tag }}</label> {{ field }}
+                </div>
+                {% endfor %}
+                <link rel="stylesheet" type="text/css" media="screen"
+                      href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css"/>
+                <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"
+                      rel="stylesheet"/>
 
-    <div id="datetimepicker1" class="input-append date" style="margin-left:-15px">
-        <input class="form-control" data-format="dd/MM/yyyy hh:mm:ss"></input>
-        <span class="add-on" style="height:34px">
-            <i data-time-icon="icon-time" style="height:34px" data-date-icon="icon-calendar"></i>
-        </span>
-    </div>
+                <div style="margin-left:-30px" class="container">
+                    <label for="start_date">Start date: </label>
 
-    <script type="text/javascript">
-  $(function() {
+                    <div id="datetimepicker1" class="input-append date">
+                        <input class="form-control" style="width:180px;" id="start_date"
+                               data-format="dd/MM/yyyy hh:mm:ss" name="stop-date" />
+                    <span class="add-on" style="height:34px">
+                        <i data-time-icon="icon-time" style="height:34px" data-date-icon="icon-calendar"></i>
+                    </span>
+                    </div>
+                    <label for="stop_date">Stop date: </label>
+
+                    <div id="datetimepicker2" class="input-append date">
+                        <input class="form-control" style="width:180px;" id="stop_date"
+                               data-format="dd/MM/yyyy hh:mm:ss" name="stop-date" />
+                    <span class="add-on" style="height:34px">
+                        <i data-time-icon="icon-time" style="height:34px" data-date-icon="icon-calendar"></i>
+                    </span>
+                    </div>
+                    <br/><br/>
+                    <button type="submit" class="btn btn-primary">
+                        Add event
+                    </button>
+
+                </div>
+
+
+            </div>
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        Latitude: <input id="latitude" style="width:200px" class="form-control" name="latitude" readonly>
+                    </div>
+                    <div class="col-md-6">
+                        Longitude: <input id="longitude" style="width:200px" class="form-control" name="longitude" readonly>
+                    </div>
+                </div>
+
+                <br/>
+                <input id="pac-input" class="controls lock-enter-submit" style="margin:10px; height:34px" type="text"
+                       placeholder="Enter address">
+
+                <div id="map-canvas" style="height: 400px; width: 600px"></div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+$(function() {
     $('#datetimepicker1').datetimepicker({
+      language: 'pt-BR',
+    });
+    $('#datetimepicker2').datetimepicker({
       language: 'pt-BR'
     });
-  });
+});
+Date.prototype.toDateInputValue = (function() {
+    var local = new Date(this);
+    return local.getDate() + "/"
+                + (local.getMonth()+1)  + "/"
+                + local.getFullYear() + " "
+                + local.getHours() + ":"
+                + local.getMinutes() + ":"
+                + local.getSeconds();
+});
+var dd = new Date();
+dd.setDate(dd.getDate() + 1);
+$('#start_date').val(dd.toDateInputValue());
+dd.setHours(dd.getHours() + 1);
+$('#stop_date').val(dd.toDateInputValue());
+
+$('input.lock-enter-submit').keydown(function(e) {
+  if(e.keyCode == 13) {
+    return false;
+  }
+});
+
+
 </script>
-    <br /><br />
-    <input id="pac-input" class="controls" style="margin:10px" type="text" placeholder="Search Box">
-    <div id="map-canvas"></div>
-</form>
 {% endblock %}

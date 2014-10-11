@@ -1,3 +1,8 @@
+function update_latlng_controls(latLng) {
+     document.getElementById("latitude").value = latLng.lat();
+	 document.getElementById("longitude").value = latLng.lng();
+}
+
 function initialize() {
     var markers = [];
     var map = new google.maps.Map(document.getElementById('map-canvas'), {
@@ -18,6 +23,10 @@ function initialize() {
 						 draggable: true
 					       });
         markers.push(newMarker);
+	update_latlng_controls(evt.latLng);
+	google.maps.event.addListener(newMarker, "drag", function (mEvent) {
+	    update_latlng_controls(mEvent.latLng);
+	    });
     });
     var defaultBounds = new google.maps.LatLngBounds(
 	new google.maps.LatLng(-33.8902, 151.1759),
@@ -51,6 +60,7 @@ function initialize() {
 	}
 
 	map.fitBounds(bounds);
+	map.setZoom(15);
     });
 
     google.maps.event.addListener(map, 'bounds_changed', function() {
