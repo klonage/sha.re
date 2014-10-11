@@ -2,6 +2,23 @@
 
 {% block main %}
 
+{% if add_error > 0 %}
+<div class="alert alert-danger">
+    <span class="glyphicon glyphicon-remove"></span>
+    <strong>
+        {% if add_error == 1 %}
+        Invalid start/stop date.
+        {% elif add_error == 2 %}
+        Invalid or empty location.
+        {% elif add_error == 3 %}
+        Invalid event's name.
+        {% elif add_error == 4 %}
+        Something's wrong with sql statement.
+        {% endif %}
+    </strong>
+</div>
+{% endif %}
+
 <form class="form-horizontal" method="post">{% csrf_token %}
     <div class="container">
         <div class="row">
@@ -21,7 +38,7 @@
 
                     <div id="datetimepicker1" class="input-append date">
                         <input class="form-control" style="width:180px;" id="start_date"
-                               data-format="dd/MM/yyyy hh:mm:ss" name="stop-date" />
+                               data-format="dd/MM/yyyy hh:mm:ss" name="start-date" />
                     <span class="add-on" style="height:34px">
                         <i data-time-icon="icon-time" style="height:34px" data-date-icon="icon-calendar"></i>
                     </span>
@@ -41,8 +58,6 @@
                     </button>
 
                 </div>
-
-
             </div>
             <div class="col-md-6">
                 <div class="row">

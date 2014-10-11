@@ -11,7 +11,7 @@ class HashTag(models.Model):
 class Event(models.Model):
     name = models.CharField(max_length=200)
     start_date = models.DateTimeField()
-    stop_date = models.DateTimeField()
+    stop_date = models.DateTimeField(null=True)
     description = models.TextField()
     creator = models.ForeignKey(User)
     max_count = models.IntegerField()
@@ -28,7 +28,7 @@ class EventForm(ModelForm):
         widgets = {
             'name': TextInput(attrs={'class': 'form-control', 'type': '', 'style': 'width:208px'}),
             'max_count': NumberInput(attrs={'value': '5', 'style': 'height:34px', 'min': '0'}),
-            'description': Textarea(attrs={'rows': 5, })#'style': 'width:300px'})
+            'description': Textarea(attrs={'rows': 5, })
         }
         error_messages = {
             'name': {
