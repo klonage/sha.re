@@ -1,0 +1,19 @@
+.short-event {
+border: 1px solid aliceblue;
+border-radius: 10px;
+background: aliceblue;
+padding: 15px;
+margin : 20px;
+}
+
+.short-event .header {
+font-size: 20px;
+}
+
+.hash-btn {
+padding:5px;
+}
+
+.cite {
+font-size: 10px;
+}

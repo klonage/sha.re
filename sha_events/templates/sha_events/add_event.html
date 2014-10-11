@@ -2,6 +2,8 @@
 
 {% block main %}
 
+<link rel="stylesheet" type="text/css" media="screen" href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/master/build/css/bootstrap-datetimepicker.min.css" />
+
 {% if add_error > 0 %}
 <div class="alert alert-danger">
     <span class="glyphicon glyphicon-remove"></span>
@@ -28,35 +30,39 @@
                     <label>{{ field.label_tag }}</label> {{ field }}
                 </div>
                 {% endfor %}
-                <link rel="stylesheet" type="text/css" media="screen"
-                      href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css"/>
-                <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css"
-                      rel="stylesheet"/>
 
-                <div style="margin-left:-30px" class="container">
-                    <label for="start_date">Start date: </label>
+                <div style="margin-left:-15px" class="container">
+                    <label style="margin-left:-15px" for="start_date">Start date: </label>
+                    <div class="row"> <div class='col-sm-2'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                <input type='text' class="form-control" style="width:180px;" id="start_date"
+                                       data-format="dd/MM/yyyy hh:ii" name="start-date" />
+                                <span class="input-group-addon"><span class="glyphicon-time glyphicon"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div> </div>
+                    <label style="margin-left:-15px" for="start_date">Stop date: </label>
+                    <div class="row"> <div class='col-sm-2'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker2'>
+                                <input type='text' class="form-control" style="width:180px;" id="stop_date"
+                                       data-format="dd/MM/yyyy hh:ii" name="stop-date" />
+                                <span class="input-group-addon"><span class="glyphicon-time glyphicon"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div> </div>
+                    <div style="margin-left:-15px">
+                        <label for="hashtag-tokenfield">Hash tags (separated by comma ','):</label>
+                        <input type="text" name="hashtags" class="form-control" id="hashtag-tokenfield" style="width:210px" />
 
-                    <div id="datetimepicker1" class="input-append date">
-                        <input class="form-control" style="width:180px;" id="start_date"
-                               data-format="dd/MM/yyyy hh:mm:ss" name="start-date" />
-                    <span class="add-on" style="height:34px">
-                        <i data-time-icon="icon-time" style="height:34px" data-date-icon="icon-calendar"></i>
-                    </span>
+                        <br/>
+                        <button type="submit" class="btn btn-primary">
+                            Add event
+                        </button>
                     </div>
-                    <label for="stop_date">Stop date: </label>
-
-                    <div id="datetimepicker2" class="input-append date">
-                        <input class="form-control" style="width:180px;" id="stop_date"
-                               data-format="dd/MM/yyyy hh:mm:ss" name="stop-date" />
-                    <span class="add-on" style="height:34px">
-                        <i data-time-icon="icon-time" style="height:34px" data-date-icon="icon-calendar"></i>
-                    </span>
-                    </div>
-                    <br/><br/>
-                    <button type="submit" class="btn btn-primary">
-                        Add event
-                    </button>
-
                 </div>
             </div>
             <div class="col-md-6">
@@ -82,11 +88,11 @@
 <script type="text/javascript">
 $(function() {
     $('#datetimepicker1').datetimepicker({
-      language: 'pt-BR',
+      'format': 'DD/MM/YYYY HH:mm'
     });
     $('#datetimepicker2').datetimepicker({
-      language: 'pt-BR'
-    });
+      'format': 'DD/MM/YYYY HH:mm'
+          });
 });
 Date.prototype.toDateInputValue = (function() {
     var local = new Date(this);
@@ -94,8 +100,7 @@ Date.prototype.toDateInputValue = (function() {
                 + (local.getMonth()+1)  + "/"
                 + local.getFullYear() + " "
                 + local.getHours() + ":"
-                + local.getMinutes() + ":"
-                + local.getSeconds();
+                + local.getMinutes();
 });
 var dd = new Date();
 dd.setDate(dd.getDate() + 1);
@@ -109,6 +114,25 @@ $('input.lock-enter-submit').keydown(function(e) {
   }
 });
 
+$('#hashtag-tokenfield').tokenfield({
+  autocomplete: {
+    source: [
+    {% for autohash in autocomplete_hashes %}'{{autohash.name}}',{% endfor %}],
+    delay: 100
+  },
+    showAutocompleteOnFocus: true
+});
+$('#hashtag-tokenfield').on('tokenfield:createtoken', function (event) {
+    var existingTokens = $(this).tokenfield('getTokens');
+    $.each(existingTokens, function(index, token) {
+        if (token.value === event.attrs.value)
+            event.preventDefault();
+    });
+});
 
 </script>
+
+<script type="text/javascript" src="http://192.168.1.109:8080/static/bootstrap/js/moment.js"></script>
+<script type="text/javascript" src="http://192.168.1.109:8080/static/bootstrap/js/bootstrap-datetimepicker.js"></script>
+
 {% endblock %}

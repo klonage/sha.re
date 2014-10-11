@@ -7,8 +7,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Bootstrap 101 Template</title>
 
+
+        <link href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet">
         <!-- Bootstrap -->
         <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+        <link href="{% static "bootstrap/css/bootstrap-theme.min.css" %}" rel="stylesheet">
 
         <link href="{% static "css/social-buttons.css" %}" rel="stylesheet">
 
@@ -24,9 +27,14 @@
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="{% static "bootstrap/js/bootstrap.min.js" %}"></script>
-        <script type="text/javascript" src="{% static "bootstrap/js/bootstrap-datetimepicker.min.js" %}"></script>
+
+        <script type="text/javascript" src="{% static "bootstrap-tokenfield/bootstrap-tokenfield.js" %}"></script>
+        <link href="{% static "bootstrap-tokenfield/css/bootstrap-tokenfield.css" %}" rel="stylesheet">
+        <link href="{% static "css/base.css" %}" rel="stylesheet">
+
     </head>
     <body>
 
@@ -37,8 +45,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><input style="margin:10px" size=50 type="text" class="form-control" placeholder="Search for events" required></li>
-                    <li><a href="#about">About</a></li>
+                    <li><a><input size=50 style='height:25px' type="text" class="form-control" placeholder="Search for events" required></a></li>
+                    <li><a href="/event/new">Add event</a></li>
                     <li><a href="#contact">Contact</a></li>
                     {% if user and not user.is_anonymous %}
                     <li class="dropdown">
@@ -65,6 +73,7 @@
             <!--/.nav-collapse -->
         </div>
     </div>
+
     <div class="container" style="margin-top:80px">
         {% block main %}{% endblock %}
     </div>

@@ -5,7 +5,7 @@ from django.utils.translation import gettext as _
 
 
 class HashTag(models.Model):
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=30, unique=True)
 
 
 class Event(models.Model):
@@ -26,9 +26,9 @@ class EventForm(ModelForm):
         model = Event
         fields = ['name', 'max_count', 'description']
         widgets = {
-            'name': TextInput(attrs={'class': 'form-control', 'type': '', 'style': 'width:208px'}),
+            'name': TextInput(attrs={'class': 'form-control', 'type': '', 'style': 'width:225px'}),
             'max_count': NumberInput(attrs={'value': '5', 'style': 'height:34px', 'min': '0'}),
-            'description': Textarea(attrs={'rows': 5, })
+            'description': Textarea(attrs={'rows': 5, 'style': 'width:225px'})
         }
         error_messages = {
             'name': {
