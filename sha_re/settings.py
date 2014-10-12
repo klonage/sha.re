@@ -41,6 +41,8 @@ INSTALLED_APPS = (
     'sha_auth',
     'sha_main',
     'sha_events',
+    'django_messages',
+    'notification'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -73,7 +75,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 TEMPLATE_DIRS = [
-    os.path.join(BASE_DIR, 'templates')
+    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'messages_module/templates')
 ]
 
 ROOT_URLCONF = 'sha_re.urls'
@@ -126,3 +129,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025

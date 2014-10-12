@@ -1,0 +1,13 @@
+{% extends "django_messages/base.html" %} 
+{% load i18n %} 
+{% block content %} 
+<h1>{% trans "Compose Message"%}</h1>
+<form action="" method="post" class="form-horizontal" role="form">
+{% csrf_token %} 
+<table class="table">
+{{ form.as_table }}
+</table>
+<input class="btn btn-primary" type="submit" value="{% trans "Send" %} &raquo;"/>
+</form>
+
+{% endblock %}

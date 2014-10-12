@@ -4,7 +4,7 @@ from sha_events.models import Event
 
 
 def nearest_events(cnt):
-    return Event.objects.order_by('-start_date')[:cnt]
+    return Event.objects.order_by('start_date')[:cnt]
 
 
 def index(request):

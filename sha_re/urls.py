@@ -9,4 +9,5 @@ urlpatterns = patterns('',
     url(r'^event/', include('sha_events.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', include('sha_main.urls')),
+    url(r'^messages/', include('django_messages.urls')),
 )
