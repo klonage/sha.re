@@ -2,6 +2,10 @@
 
 {% block main %}
 
+<h3>Friends</h3>
+<ul>{% for friend in friends %}
+  <li>{{ friend.username }}</li>
+{% endfor %}</ul>
 <div class="row">
   <div class="col-md-6">
 Nearest events:

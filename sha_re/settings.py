@@ -42,7 +42,8 @@ INSTALLED_APPS = (
     'sha_main',
     'sha_events',
     'django_messages',
-    'notification'
+    'notification',
+    'friends'
 )
 
 MIDDLEWARE_CLASSES = (
