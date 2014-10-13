@@ -1,0 +1,21 @@
+{% extends 'sha_main/base.html' %}
+{% block main %}
+<h2>{{event.name}}</h2>
+<table clsas="table">
+    <tr>
+        <td style="width:300px">Creator</td><td><a href="/user/{{event.creator.id}}">{{event.creator.username}}</a></td>
+    </tr>
+</table>
+{% if is_participant == 0 %}
+<a href="/event/attend/{{event.id}}" class="btn btn-primary">Attend</a>
+{% else %}
+<a href="/event/cancel/{{event.id}}" class="btn btn-primary">Cancel</a>
+{% endif %}
+<h3>Participants:</h3>
+<ul>
+
+{% for participant in event.participants.all %}
+    <li><a href="/user/{{participant.id}}">{{participant.username}}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

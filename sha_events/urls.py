@@ -7,5 +7,8 @@ urlpatterns = patterns('',
                        url(r'^new/', views.new_event, name='new_event'),
                        url(
                            r'^events_from_range/(?P<north>-*\d+\.?\d+)/(?P<south>-*\d+\.?\d+)/(?P<east>-*\d+\.?\d+)/(?P<west>-*\d+\.?\d+)/$',
-                           views.events_from_range, name='events_from_range')
+                           views.events_from_range, name='events_from_range'),
+                           url('^(?P<event_id>\d+)', views.event_details),
+                           url('^attend/(?P<event_id>\d+)', views.attend),
+                           url('^cancel/(?P<event_id>\d+)', views.cancel)
 )

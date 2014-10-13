@@ -19,6 +19,7 @@ class Event(models.Model):
     longitude = models.DecimalField(max_digits=12, decimal_places=9)
     human_readable_location = models.CharField(max_length=200, default='')
     hash_tags = models.ManyToManyField(HashTag)
+    participants = models.ManyToManyField(User, related_name='participants')
 
 
 class EventForm(ModelForm):

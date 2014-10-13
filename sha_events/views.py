@@ -2,6 +2,7 @@ from datetime import datetime
 from django.shortcuts import render
 from sha_events.models import EventForm, Event, HashTag
 from django.shortcuts import redirect
+from django.http import HttpResponseRedirect
 
 
 class NewEventErrorCode:
@@ -11,8 +12,23 @@ class NewEventErrorCode:
     SQL = 4
 
 
+def attend(request, event_id):
+    event = Event.objects.get(id=event_id)
+
+    event.participants.add(request.user)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def cancel(request, event_id):
+    event = Event.objects.get(id=event_id)
+
+    event.participants.remove(request.user)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 def events_from_range(request, north, south, east, west):
-    events_nearby = Event.objects.filter(latitude__gte=south, latitude__lte=north, longitude__gte=west, longitude__lte=east);
+    events_nearby = Event.objects.filter(latitude__gte=south, latitude__lte=north, longitude__gte=west,
+                                         longitude__lte=east);
     return render(request, 'sha_events/events_from_range.html', {'events': events_nearby})
 
 
@@ -30,6 +46,13 @@ def create_hash_tags(hash_str):
 def convert_date(bad_formated):
     return datetime.strptime(
         bad_formated, '%d/%m/%Y %H:%M').strftime('%Y-%m-%d %H:%M')
+
+
+def event_details(request, event_id):
+    event = Event.objects.get(id=event_id);
+    return render(request, 'sha_events/details.html',
+                  {'event': event,
+                   'is_participant': event.participants.filter(id=request.user.id).count()})
 
 
 def save_new_event(request):
@@ -54,7 +77,8 @@ def save_new_event(request):
     # noinspection PyBroadException
     try:
         evt = Event.objects.create(start_date=start_date, stop_date=stop_date, max_count=max_count, latitude=latitude,
-                                   longitude=longitude, name=event_name, creator_id=request.user.id, description=request.POST['description'])
+                                   longitude=longitude, name=event_name, creator_id=request.user.id,
+                                   description=request.POST['description'])
         evt.hash_tags = create_hash_tags(request.POST['hashtags'])
     except:
         return NewEventErrorCode.SQL
@@ -63,7 +87,7 @@ def save_new_event(request):
 
 
 def just_added_event(request):
-    return render(request, 'sha_events/just_added_event.html');
+    return render(request, 'sha_events/just_added_event.html')
 
 
 def new_event(request):

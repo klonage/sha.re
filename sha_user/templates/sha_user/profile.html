@@ -21,4 +21,10 @@
 <a href="http://facebook.com/{{user_fb_id}}">Facebook profile</a>
 <img src="http://graph.facebook.com/{{user_fb_id}}/picture?type=large" />
 {% endif %}
+<h3>User events</h3>
+{% for event in user_events %}
+<ul>
+    <li><a href="/event/{{event.id}}">{{event.name}}</a></li>
+</ul>
+{% endfor %}
 {% endblock %}

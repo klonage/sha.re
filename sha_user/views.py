@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from friends.models import FriendshipManager, FriendshipRequest
+from sha_events.models import Event
 
 
 def get_facebook_uid(user):
@@ -41,4 +42,5 @@ def show_profile(request, user_id):
         {'user_profile': user_profile,
          'invitation_status': invitation_status,
          'user_fb_id': fb_id,
+         'user_events': Event.objects.all(),
          'friends': mgr.friends_of(user_profile)})

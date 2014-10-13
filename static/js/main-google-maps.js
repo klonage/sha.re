@@ -18,12 +18,11 @@ function reload_markers() {
 
 function initializeMainMap() {
   var mapOptions = {
-    zoom: 8,
-    center: new google.maps.LatLng(-34.397, 150.644)
+    zoom: 1 ,
+    center: new google.maps.LatLng(10,10),
   };
   mainMap = new google.maps.Map(document.getElementById('main-map-canvas'),
       mapOptions);
-
 
   google.maps.event.addListener(mainMap, 'bounds_changed', function() {
     new_refresh = new Date();
@@ -37,6 +36,7 @@ function initializeMainMap() {
       setTimeout(function(){reload_markers(); process_wait=false;}, wait_between_refresh - diff);
     }
   });
+
 
 }
 
@@ -62,7 +62,9 @@ function load_new_markers(str) {
   }));
 
   }
+  var markerCluster = new MarkerClusterer(mainMap, mainMapMarkers);
 }
+
 
 google.maps.event.addDomListener(window, 'load', initializeMainMap);
 

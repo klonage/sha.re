@@ -7,7 +7,7 @@
 Nearest events:
 {% for event in nearest_events %}
 <div class="short-event">
-    <span class="header" style="float:left">{{ event.name }}</span>
+    <span class="header" style="float:left"><a href="/event/{{event.id}}">{{ event.name }}</a></span>
     <span style="float:right">
         {% for hash_tag in event.hash_tags.all %}
         <button type="button" class="btn btn-primary hash-btn">{{hash_tag.name}}</button>
@@ -26,8 +26,4 @@ Nearest events:
         <div id="main-map-canvas" style="height: 400px; width: 600px"></div>
     </div>
     </div>
-        {% for f in friends %}
-        aa
-        {% endfor %}{{soc}}
-        {{uid}} {{ex}}
 {% endblock %}
