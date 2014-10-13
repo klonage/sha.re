@@ -2,10 +2,23 @@
 
 {% block main %}
 <h1>{{ user_profile.username }}</h1>
+{% if invitation_status == 1 %}
 <a class="btn btn-default" href="/friends/add/{{user_profile.username}}">Invite to a friends</a>
+{% elif invitation_status == 2 %}
+<a class="btn btn-default" href="/friends/delete/{{user_profile.username}}">Delete friend</a>
+{% elif invitation_status == 3 %}
+<a class="btn btn-default" href="/friends/cancel/{{user_profile.username}}">Cancel invitation</a>
+{% elif invitation_status == 4 %}
+<a class="btn btn-default" href="/friends/accept/{{user_profile.username}}">Accept invitation</a>
+<a class="btn btn-default" href="/friends/decline/{{user_profile.username}}">Decline invitation</a>
+{% endif %}
 <h3>Friends</h3>
 <ul>{% for friend in friends %}
   <li><a href="/user/{{friend.id}}">{{ friend.username }}</a></li>
 {% endfor %}</ul>
 
+{% if user_fb_id != 0 %}
+<a href="http://facebook.com/{{user_fb_id}}">Facebook profile</a>
+<img src="http://graph.facebook.com/{{user_fb_id}}/picture?type=large" />
+{% endif %}
 {% endblock %}

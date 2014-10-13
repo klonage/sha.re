@@ -27,17 +27,17 @@
         <div class="col-md-10">
             <h3>Sign in by 1 click!</h3> <br/>
             <button type="button"
-                    onClick="location.href='{% url 'social:begin' 'facebook' %}?next={{ request.path }}'"
+                    onClick="location.href='{% url 'socialauth_begin' 'facebook' %}?next={{ request.path }}'"
                     class="facebook-login-btn social-login-btn btn btn-primary">Facebook
             </button>
             <br/>
             <button type="button"
-                    onClick="location.href='{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}'"
+                    onClick="location.href='{% url 'socialauth_begin' 'google-oauth2' %}?next={{ request.path }}'"
                     class="googleplus-login-btn social-login-btn btn btn-primary">Google
             </button>
             <br/>
             <button type="button"
-                    onClick="location.href='{% url 'social:begin' 'twitter' %}?next={{ request.path }}'"
+                    onClick="location.href='{% url 'socialauth_begin' 'twitter' %}?next={{ request.path }}'"
                     class="twitter-login-btn social-login-btn btn btn-primary">Twitter
             </button>
             <br/>

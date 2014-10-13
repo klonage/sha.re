@@ -54,8 +54,9 @@ def index(request):
         if request.POST.get('signupform', 0):
             user_created = custom_register(request)
         if request.POST.get('signinform', 0):
-            custom_auth(request)
-            return redirect('/')
+            user_signin = custom_auth(request)
+            if user_signin == 0:
+                return redirect('/')
 
     return render_to_response('sha_auth/index.html',
                               {"user_created": user_created,

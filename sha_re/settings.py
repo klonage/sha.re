@@ -37,7 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'social.apps.django_app.default', # social media sign in (facebook, twitter, google+)
+    'social_auth', # social media sign in (facebook, twitter, google+)
     'sha_auth',
     'sha_main',
     'sha_events',
@@ -70,10 +70,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 AUTHENTICATION_BACKENDS = (
-   'social.backends.facebook.FacebookOAuth2',
-   'social.backends.google.GoogleOAuth2',
-   'social.backends.twitter.TwitterOAuth',
-   'django.contrib.auth.backends.ModelBackend',
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 TEMPLATE_DIRS = [
@@ -100,14 +100,16 @@ DATABASES = {
     }
 }
 
-SOCIAL_AUTH_FACEBOOK_KEY = '340796046081649'
-SOCIAL_AUTH_FACEBOOK_SECRET = '3d69aa3188940fef081e1b9ecfe552b5'
+FACEBOOK_APP_ID = '340796046081649'
+FACEBOOK_API_SECRET = '3d69aa3188940fef081e1b9ecfe552b5'
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '257711607634-d81sdppmlafpl1abk41o6gvo22c4c6qm.apps.googleusercontent.com'
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'EIpp2jy9eFa-noZboU9BHikP'
 
-SOCIAL_AUTH_TWITTER_KEY = 'gHuRCE1CoksfdjJJltOmzRHPb'
-SOCIAL_AUTH_TWITTER_SECRET = 'jIhO17jJ4j7zr8EnTS7VArKYFjG2q7inrEtBPkIM0UE0pnYQIh'
+GOOGLE_OAUTH2_CLIENT_ID = '257711607634-d81sdppmlafpl1abk41o6gvo22c4c6qm.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET = 'EIpp2jy9eFa-noZboU9BHikP'
+
+TWITTER_CONSUMER_KEY = 'gHuRCE1CoksfdjJJltOmzRHPb'
+TWITTER_CONSUMER_SECRET = 'jIhO17jJ4j7zr8EnTS7VArKYFjG2q7inrEtBPkIM0UE0pnYQIh'
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
@@ -131,6 +133,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+LOGIN_URL          = '/login-form/'
+LOGIN_REDIRECT_URL = '/logged-in/'
+LOGIN_ERROR_URL    = '/login-error/'
 
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
