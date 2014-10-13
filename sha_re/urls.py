@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^$', include('sha_main.urls')),
     url(r'^messages/', include('django_messages.urls')),
     url(r'^friends/', include('friends.urls')),
+    url(r'^user/', include('sha_user.urls')),
 )

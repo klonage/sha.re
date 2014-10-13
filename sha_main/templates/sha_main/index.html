@@ -2,10 +2,6 @@
 
 {% block main %}
 
-<h3>Friends</h3>
-<ul>{% for friend in friends %}
-  <li>{{ friend.username }}</li>
-{% endfor %}</ul>
 <div class="row">
   <div class="col-md-6">
 Nearest events:
@@ -19,7 +15,7 @@ Nearest events:
     </span>
     <div style="clear:both"></div>
     <blockquote><span style="font-size:12px">
-        <i>{{event.start_date}}</i> <br />
+        <i>{{event.start_date}} &bull; added by <a href="/user/{{event.creator.id}}">{{event.creator}}</a></i><br />
         {{event.description}}</span></blockquote>
 </div>
 

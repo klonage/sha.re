@@ -1,0 +1,11 @@
+{% extends 'sha_main/base.html' %}
+
+{% block main %}
+<h1>{{ user_profile.username }}</h1>
+<a class="btn btn-default" href="/friends/add/{{user_profile.username}}">Invite to a friends</a>
+<h3>Friends</h3>
+<ul>{% for friend in friends %}
+  <li><a href="/user/{{friend.id}}">{{ friend.username }}</a></li>
+{% endfor %}</ul>
+
+{% endblock %}

@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'sha_auth',
     'sha_main',
     'sha_events',
+    'sha_user',
     'django_messages',
     'notification',
     'friends'
